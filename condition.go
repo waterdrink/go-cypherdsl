@@ -12,7 +12,7 @@ type ConditionBuilder struct {
 	errors  []error
 }
 
-//should be used to start a condition chain
+// should be used to start a condition chain
 func C(condition *ConditionConfig) ConditionOperator {
 	wq, err := NewCondition(condition)
 
@@ -44,7 +44,7 @@ func C(condition *ConditionConfig) ConditionOperator {
 	return cond
 }
 
-//add an error to the condition chain
+// add an error to the condition chain
 func (c *ConditionBuilder) addError(e error) {
 	if c.errors == nil {
 		c.errors = []error{e}
@@ -53,12 +53,12 @@ func (c *ConditionBuilder) addError(e error) {
 	}
 }
 
-//check if the builder has had any errors down the chain
+// check if the builder has had any errors down the chain
 func (c *ConditionBuilder) hasErrors() bool {
 	return c.errors != nil && len(c.errors) > 0
 }
 
-//add another node to the chain
+// add another node to the chain
 func (c *ConditionBuilder) addNext(node *operatorNode) error {
 	if node == nil {
 		return errors.New("node can not be nil")
@@ -250,6 +250,7 @@ const (
 	LessThanOrEqualToOperator    BooleanOperator = "<="
 	GreaterThanOrEqualToOperator BooleanOperator = ">="
 	EqualToOperator              BooleanOperator = "="
+	NotEqualToOperator           BooleanOperator = "<>"
 	InOperator                   BooleanOperator = "IN"
 	IsOperator                   BooleanOperator = "IS"
 	RegexEqualToOperator         BooleanOperator = "=~"
@@ -258,7 +259,7 @@ const (
 	ContainsOperator             BooleanOperator = "CONTAINS"
 )
 
-//configuration object for where condition
+// configuration object for where condition
 type ConditionConfig struct {
 	//operators that can be used
 	ConditionOperator BooleanOperator
